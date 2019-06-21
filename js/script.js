@@ -81,9 +81,20 @@ function showFullInfo(){ // переход на страницу фильма
         console.log(output);
        movie.innerHTML = `<h4 class="col-12 text-center text-info">${output.name || output.title}</h4>
        <div class="col-4">
-       <img src = '${output.poster_path}'>
+       <img src = '${urlPoster + output.poster_path}'>
+       ${(output.homepage) ? `<p class="text-center"><a href="${output.homepage}" target="_blank">Официальная страница</a></p>` : ''}
+       ${(output.homepage) ? `<p class="text-center"><a href="https://imdb.com/title/${output.imdb_id}" target="_blank">IMDB.COM</a></p>` : ''}
        </div>
-       <div class="col-8"></div>`; 
+       <div class="col-8">
+       <p>Рейтинг: ${output.vote_average}/10 </p>
+       <p>Статус: ${output.status} </p>
+       <p>Премьера: ${output.first_air_date || output.release_date}</p>
+       
+       <p>${(output.last_episode_to_air) ? `<p>${output.number_of_seasons} Сезон 
+       ${output.number_of_episodes} Серий</p> ` : ``}
+
+       <p>Описание: ${output.overview}</p>
+       </div>`; 
     })
     .catch(function (reason) {
         movie.innerHTML = 'Что то не так!';
